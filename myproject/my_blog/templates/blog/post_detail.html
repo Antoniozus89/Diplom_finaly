@@ -1,0 +1,46 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<h2>{{ post.Название }}</h2>
+<p>{{ post.Содержание }}</p>
+<p>Дата публикации: {{ post.published_date|date:"F j, Y" }}</p>
+
+
+
+
+<ul>
+    {% for comment in post.comments.all %}
+    <li>{{ comment.content }} - {{ comment.created_at }}</li>
+    {% endfor %}
+</ul>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+<h3>Добавить комментарий:</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить комментарий</button>
+</form>
+
+<a href="{% url 'post_list' %}">Назад к списку</a>
+{% endblock %}

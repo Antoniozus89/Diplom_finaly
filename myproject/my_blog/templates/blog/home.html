@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать в мой блог!</h2>
+<p>Здесь я могу создавать, редактировать и удалять посты.</p>
+
+<h3>Список постов:</h3>
+<ul>
+    {% for post in posts %}
+        <li>
+            <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> <!-- Ссылка на детальную страницу поста -->
+            <p>{{ post.published_date|date:"F j, Y" }}</p> <!-- Дата публикации -->
+        </li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'post_create' %}">Создать пост</a></p>
+<p><a href="{% url 'register' %}">Зарегистрироваться</a> или <a href="{% url 'login' %}">войти</a>.</p>
+{% endblock %}

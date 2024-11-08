@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ form.instance.id|yesno:"Редактирование поста,Создание поста" }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ form.instance.id|yesno:"Редактирование поста,Создание поста" }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+
+<a href="{% url 'post_list' %}">Назад к списку</a>
+{% endblock %}

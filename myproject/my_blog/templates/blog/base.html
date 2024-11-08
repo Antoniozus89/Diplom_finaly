@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Блог{% endblock %}</title>
+    <meta name="description" content="Добро пожаловать в мой блог! Здесь вы можете найти интересные статьи и новости.">
+    <meta name="keywords" content="блог, статьи, новости">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            color: black;
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            padding: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: black;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none; /* Убираем маркеры списка */
+            padding: 0; /* Убираем отступы */
+            text-align: center; /* Центрируем текст */
+        }
+        nav ul li {
+            display: inline; /* Выводим элементы в ряд */
+            margin-right: 15px; /* Отступ между элементами */
+        }
+        nav ul li a {
+            text-decoration: none; /* Убираем подчеркивание ссылок */
+            color: black; /* Цвет ссылок */
+        }
+        nav ul li a:hover {
+            text-decoration: underline; /* Подчеркивание при наведении */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Мой Блог</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                <li><a href="{% url 'post_list' %}">Список постов</a></li>
+                <li><a href="{% url 'post_create' %}">Создать пост</a></li>
+                <li><a href="{% url 'register' %}">Регистрация</a></li>
+                <li><a href="{% url 'login' %}">Вход</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
